@@ -117,7 +117,7 @@ export default function Navigation() {
           <div className="flex h-16 items-center justify-between">
 
             {/* DESKTOP NAV */}
-            <div className="hidden md:flex items-center gap-2 flex-1 justify-center px-8">
+            <div className="hidden min-[1200px]:flex items-center gap-2 flex-1 justify-center px-8">
               {navItems.map((item, index) => {
                 const hoverColors = [
                   "hover:bg-cyan-100 dark:hover:bg-cyan-900/30",
@@ -198,7 +198,7 @@ export default function Navigation() {
               {/* MOBILE MENU BUTTON */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 text-gray-900 dark:text-white"
+                className="min-[1200px]:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 text-gray-900 dark:text-white"
               >
                 {isOpen ? (
                   <X className="w-6 h-6" />
@@ -214,7 +214,7 @@ export default function Navigation() {
       {/* MOBILE MENU BACKDROP */}
       <div
         className={`
-          fixed inset-0 z-30 md:hidden
+          fixed inset-0 z-30 min-[1200px]:hidden
           bg-black/50 backdrop-blur-sm
           ${isOpen ? "backdrop-open pointer-events-auto" : "backdrop-close pointer-events-none"}
         `}
@@ -224,7 +224,7 @@ export default function Navigation() {
       {/* MOBILE MENU DRAWER */}
       <div
         className={`
-          fixed inset-y-0 right-0 z-40 md:hidden
+          fixed inset-y-0 right-0 z-40 min-[1200px]:hidden
           w-72 bg-white dark:bg-gray-800 shadow-2xl border-l border-gray-200 dark:border-gray-700
           ${isOpen ? "menu-open" : "menu-close"}
         `}
