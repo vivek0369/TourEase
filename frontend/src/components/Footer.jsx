@@ -4,7 +4,7 @@ import {
   Heart,
   Instagram,
   Linkedin,
-  Twitter,
+  X,
   Youtube,
   Facebook,
 } from "lucide-react";
@@ -66,7 +66,7 @@ export default function Footer() {
                 aria-label="X (Twitter)"
                 className="text-gray-500 hover:text-teal-600 dark:hover:text-orange-400 transition-all duration-300 hover:scale-110"
               >
-                <Twitter className="w-5 h-5" />
+                <X className="w-5 h-5" />
               </a>
 
               <a
@@ -102,6 +102,9 @@ export default function Footer() {
                 <FooterLink to="/features" label="Features" />
                 <FooterLink to="/destinations" label="Destinations" />
                 <FooterLink to="/plan-trip" label="Plan Trip" />
+                <FooterLink to="/trip-planner" label="Trip Planner" />
+                <FooterLink to="/smart-planner" label="Smart Planner" />
+                <FooterLink to="/split-expense" label="Expense splitter" />
               </ul>
             </div>
 
@@ -112,6 +115,7 @@ export default function Footer() {
 
               <ul className="space-y-4">
                 <FooterLink to="/about" label="About Us" />
+                <FooterLink to="/destinations" label="Explore" />
                 <FooterLink to="/contact" label="Contact" />
                 <FooterLink to="/contributors" label="Contributors" />
               </ul>
@@ -123,6 +127,8 @@ export default function Footer() {
               </h4>
 
               <ul className="space-y-4">
+                <FooterLink to="/favourites" label="Favourites" />
+                <FooterLink to="/login" label="Getting Started" />
                 <FooterLink to="/privacy" label="Privacy" />
                 <FooterLink to="/terms" label="Terms" />
                 <FooterLink to="/help" label="Help" />
@@ -145,7 +151,7 @@ export default function Footer() {
 
               <Link
                 to="/signup"
-                className="block w-full text-center bg-gradient-to-r from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 dark:from-orange-600 dark:to-orange-500 dark:hover:from-orange-500 dark:hover:to-orange-400 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-teal-500/25 dark:shadow-orange-900/40 active:scale-95 text-sm uppercase tracking-wider"
+                className="block w-full text-center bg-linear-to-r from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 dark:from-orange-600 dark:to-orange-500 dark:hover:from-orange-500 dark:hover:to-orange-400 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-teal-500/25 dark:shadow-orange-900/40 active:scale-95 text-sm uppercase tracking-wider"
               >
                 Subscribe Now
               </Link>
