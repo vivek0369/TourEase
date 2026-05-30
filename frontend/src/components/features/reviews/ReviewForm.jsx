@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import { submitReview } from "../../../services/reviewService";
 
 const ReviewForm = ({ destinationId, refreshReviews }) => {
+  const storedUser = localStorage.getItem("user");
+  const currentUser = storedUser ? JSON.parse(storedUser) : null;
+  const isAuthenticated = Boolean(localStorage.getItem("token"));
+
   const [formData, setFormData] = useState({
-    username: "",
+    username: currentUser ? currentUser.name : "",
     rating: 5,
     travelerType: "Solo",
     reviewText: "",
@@ -34,7 +38,7 @@ const ReviewForm = ({ destinationId, refreshReviews }) => {
 
       // Clear the form
       setFormData({
-        username: "",
+        username: currentUser ? currentUser.name : "",
         rating: 5,
         travelerType: "Solo",
         reviewText: "",
@@ -49,6 +53,25 @@ const ReviewForm = ({ destinationId, refreshReviews }) => {
       setIsSubmitting(false);
     }
   };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="mt-8 bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-8 text-center shadow-sm">
+        <h3 className="text-xl font-bold mb-2 text-zinc-800 dark:text-white">
+          Share Your Experience
+        </h3>
+        <p className="text-zinc-600 dark:text-zinc-400 mb-6 max-w-md mx-auto text-sm leading-relaxed">
+          Join TourEase to write reviews, like other travelers' feedback, and plan your perfect trip.
+        </p>
+        <a
+          href="/auth?mode=login"
+          className="inline-block bg-teal-500 hover:bg-teal-600 text-white px-6 py-2.5 rounded-lg font-semibold transition-colors shadow-md hover:shadow-lg transform active:scale-95 duration-250 text-sm"
+        >
+          Log In to Write a Review
+        </a>
+      </div>
+    );
+  }
 
   return (
     <div className="mt-8 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6">
@@ -70,9 +93,8 @@ const ReviewForm = ({ destinationId, refreshReviews }) => {
             value={formData.username}
             onChange={handleChange}
             required
-            pattern="[A-Za-z\s]+" // Tells the browser: letters and spaces ONLY
-            title="Your name can only contain letters and spaces" // Shows up if they make a mistake
-            className="w-full p-3 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent dark:bg-zinc-900 dark:text-white focus:ring-2 focus:ring-teal-500 outline-none"
+            disabled
+            className="w-full p-3 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 dark:text-zinc-400 cursor-not-allowed outline-none font-medium"
             placeholder="John Doe"
           />
         </div>

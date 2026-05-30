@@ -8,7 +8,12 @@ const ReviewCard = ({ review, refreshReviews }) => {
   const [likesCount, setLikesCount] = useState(review.likes || 0);
   const [isLiked, setIsLiked] = useState(false);
 
-  const CURRENT_LOGGED_IN_USER = "John Doe";
+  const storedUser = localStorage.getItem("user");
+  const currentUser = storedUser ? JSON.parse(storedUser) : null;
+  const isOwner = currentUser && (
+    (review.userId && (review.userId === currentUser.id || review.userId._id === currentUser.id)) ||
+    (!review.userId && review.username === currentUser.name)
+  );
 
   const handleDelete = async () => {
     if (window.confirm("Are you sure you want to delete this review?")) {
@@ -26,6 +31,11 @@ const ReviewCard = ({ review, refreshReviews }) => {
 
   // 2. The new Like function
   const handleLike = async () => {
+    const isAuthenticated = Boolean(localStorage.getItem("token"));
+    if (!isAuthenticated) {
+      alert("Please log in to like reviews.");
+      return;
+    }
     if (isLiked) return; // Prevent spam clicking
 
     // Optimistic Update: Change the UI instantly before the server responds
@@ -95,7 +105,7 @@ const ReviewCard = ({ review, refreshReviews }) => {
         </button>
 
         {/* Only show the Delete Button if the current user owns this review! */}
-        {review.username === CURRENT_LOGGED_IN_USER && (
+        {isOwner && (
           <button
             onClick={handleDelete}
             className="flex items-center gap-1.5 text-zinc-400 hover:text-red-500 font-medium text-sm transition-colors"
